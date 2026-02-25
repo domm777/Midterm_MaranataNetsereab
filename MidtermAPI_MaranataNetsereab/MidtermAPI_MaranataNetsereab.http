@@ -1,0 +1,6 @@
+@MidtermAPI_MaranataNetsereab_HostAddress = http://localhost:5051
+
+GET {{MidtermAPI_MaranataNetsereab_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
