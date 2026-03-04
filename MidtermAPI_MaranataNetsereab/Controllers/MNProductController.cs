@@ -5,25 +5,24 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using MidtermAPI_MaranataNetsereab.Data;
 using MidtermAPI_MaranataNetsereab.Model;
 using MidtermAPI_MaranataNetsereab.Repository;
+using MidtermAPI_MaranataNetsereab.Service;
+using System.Threading.Tasks;
 
 namespace MidtermAPI_MaranataNetsereab.Controllers {
-    [Route("api/MNProduct")]
+    [Route("api/[controller]")]
     [ApiController]
     public class MNProductController : ControllerBase {
-        private readonly MNIProductService _service;
+        private readonly IMNProductService _service;
         public Dictionary<string, int> _requestCounts;
 
         [HttpGet]
-        public IActionResult GetAllMNProductById() {
-            var products = _service.GetByProductId();
-            return Ok(products);
-        }
+        public async Task<IActionResult> GetAllMNProduct() => Ok(await _service.GetAllProductsAsync());
 
         [HttpPost]
         public IActionResult AddNewMNProduct([FromBody] MNProduct product) {
             if (product.Id <= 0) {
                 return BadRequest(new {
-                    error = "InvalidParameter",
+                    error = "InvalidProduct",
                     message = "Id must be greater than zero."
                 });
             }

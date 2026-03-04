@@ -1,3 +1,8 @@
+using Microsoft.AspNetCore.Mvc;
+using MidtermAPI_MaranataNetsereab.Model;
+using MidtermAPI_MaranataNetsereab.Repository;
+using MidtermAPI_MaranataNetsereab.Service;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +11,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// !!! ai
+//builder.Services.Configure<ApiBehaviorOptions>(options => {
+//    options.SuppressModelStateInvalidFilter = true;
+//});
+
+builder.Services.AddSingleton<IMNProductRepository, MNFakeProductHistoryService>();
+
 
 var app = builder.Build();
 
